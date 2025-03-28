@@ -66,4 +66,3 @@ jobs:
           -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
           -Dsonar.pullrequest.provider=github
           -Dsonar.pullrequest.github.repository=${{ github.repository }}
-          
