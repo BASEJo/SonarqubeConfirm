@@ -13,6 +13,6 @@ public class Main {
         // ...
         lock.tryLock(); // Noncompliant
 
-        System.out.println("Hello world!");
+        // System.out.println("Hello world!");
     }
 }
