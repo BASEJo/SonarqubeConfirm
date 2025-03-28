@@ -12,5 +12,7 @@ public class Main {
         file.delete();  // Noncompliant
         // ...
         lock.tryLock(); // Noncompliant
+
+        System.out.println("Hello world!");
     }
 }
