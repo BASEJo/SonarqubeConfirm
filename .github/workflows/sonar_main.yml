@@ -30,6 +30,10 @@ jobs:
   sonarqube:
     runs-on: ubuntu-latest
     steps:
+      - name: Test connection to SonarQube server
+        run: |
+          curl -v http://localhost:9000
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
