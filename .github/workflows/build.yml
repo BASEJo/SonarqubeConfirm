@@ -48,8 +48,12 @@ jobs:
       with:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
+    # - name: Debug Environment Variables
+    #   run: |
+    #     echo "SONAR_HOST_URL=${{ secrets.SONAR_HOST_URL }}"
+    #     echo "SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}"
     - name: SonarQube Scan
       uses: SonarSource/sonarqube-scan-action@v5.1.0 # Ex: v4.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
