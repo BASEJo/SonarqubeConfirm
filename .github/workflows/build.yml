@@ -59,8 +59,11 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       with:
         projectBaseDir: .
-        args: >
+        args: |
           -Dsonar.projectKey=basesonarqubepoc_sonarqubeconfirm
           -Dsonar.organization=basesonarqubepoc
           -Dsonar.pullrequest.branch=${{ github.head_ref }}
           -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+          -Dsonar.pullrequest.provider=github
+          -Dsonar.pullrequest.github.repository=${{ github.repository }}
+          
