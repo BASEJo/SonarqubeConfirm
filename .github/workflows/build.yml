@@ -62,3 +62,6 @@ jobs:
         args: >
           -Dsonar.projectKey=basesonarqubepoc_sonarqubeconfirm
           -Dsonar.organization=basesonarqubepoc
+          ${{ if github.event.pull_request != null }}:
+            -Dsonar.pullrequest.branch=${{ github.head_ref }}
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
