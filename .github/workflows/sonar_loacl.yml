@@ -21,14 +21,12 @@ jobs:
           distribution: 'corretto'
           java-version: '21'
 
-      - name: Download SonarScanner CLI from GitHub Releases
-        run: |
-          wget -O sonar-scanner-cli.zip https://github.com/SonarSource/sonar-scanner-cli/archive/refs/tags/7.1.0.4889.zip
-          unzip sonar-scanner-cli.zip
+      - name: Install Maven
+        run: sudo apt-get install -y maven
 
-      - name: Run SonarQube Scanner (No Server)
+      - name: Run SonarQube Analysis with Latest Plugin
         run: |
-          java -jar sonar-scanner-cli.jar \
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
             -Dsonar.projectKey=test_project \
             -Dsonar.sources=src \
             -Dsonar.language=java
