@@ -11,24 +11,40 @@ jobs:
   sonar-analysis:
     runs-on: ubuntu-latest
 
-    services:
-      sonar:
-        image: sonarqube:latest
-        options: >-
-          -p 9002:9000
-        ports:
-          - 9002:9000
-
     steps:
+      # 检出代码
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # 拉取 SonarQube 镜像
+      - name: Pull SonarQube Docker image
+        run: docker pull sonarqube:latest
+
+      # 启动 SonarQube 容器
+      - name: Start SonarQube container
+        run: |
+          docker run -d --name sonarqube -p 9003:9000 sonarqube:latest
+
+      # 查看正在运行的 Docker 容器和端口映射
+      - name: List running Docker containers
+        run: docker ps
+
+      # 等待 SonarQube 启动并可用
+      - name: Wait for SonarQube to be available
+        run: |
+          echo "Waiting for SonarQube to be available..."
+          curl --silent --show-error --max-time 60 http://localhost:9003/api/system/health || exit 1
+
+      # 触发 SonarQube 项目创建
+      - name: Trigger SonarQube project creation
+        run: |
+          curl -u ${{ secrets.GITACTION_SONAR_TOKEN }}: -X POST "http://localhost:9003/api/projects/create?name=MyProject&project=MyProjectKey"
+
+      # 运行 SonarQube 扫描分析
       - name: Run SonarQube analysis
         run: |
-          curl -u ${{ secrets.GITACTION_SONAR_TOKEN }}: -X POST "http://localhost:9002/api/projects/create?name=MyProject&project=MyProjectKey"
-          
           sonar-scanner \
             -Dsonar.projectKey=MyProjectKey \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9002 \
+            -Dsonar.host.url=http://localhost:9003 \
             -Dsonar.login=${{ secrets.GITACTION_SONAR_TOKEN }}
