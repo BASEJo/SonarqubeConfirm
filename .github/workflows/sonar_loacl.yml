@@ -1,0 +1,30 @@
+name: SonarQube Analysis (Standalone)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+
+      - name: Download SonarQube Scanner CLI
+        run: |
+          curl -o sonar-scanner-cli.jar https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006.jar
+
+      - name: Run SonarQube Scanner (No Server)
+        run: |
+          java -jar sonar-scanner-cli.jar \
+            -Dsonar.projectKey=test_project \
+            -Dsonar.sources=src \
+            -Dsonar.language=java
