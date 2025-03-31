@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Test connection to SonarQube server
         run: |
-          curl -v http://localhost:9000
+          curl -v https://4acd-126-167-123-135.ngrok-free.app
 
       - uses: actions/checkout@v4
         with:
