@@ -15,7 +15,7 @@ jobs:
       sonar:
         image: sonarqube:latest
         options: >-
-          -p 9000:9000  # 暴露 SonarQube 的 9000 端口
+          -p 9000:9000
         ports:
           - 9000:9000
 
