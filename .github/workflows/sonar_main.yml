@@ -22,10 +22,11 @@ jobs:
         projectBaseDir: .
         args: > 
           -Dsonar.projectKey=DockerSonarqubeConfirm
-          -Dsonar.pullrequest.branch=${{ github.head_ref }}
-          -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
           -Dsonar.pullrequest.provider=github
           -Dsonar.pullrequest.github.repository=${{ github.repository }}
+
+# -Dsonar.pullrequest.branch=${{ github.head_ref }}
+# -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
 # jobs:
 #   sonarqube:
 #     runs-on: ubuntu-latest
