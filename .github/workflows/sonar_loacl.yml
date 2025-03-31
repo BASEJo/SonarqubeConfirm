@@ -36,6 +36,7 @@ jobs:
           -Dsonar.projectName="My Project" \
           -Dsonar.projectVersion=1.0 \
           -Dsonar.sources=src \
+          -Dsonar.token="" \
           -Dsonar.report.export.path=target/sonar-report.json
 
     - name: Display SonarQube Report
