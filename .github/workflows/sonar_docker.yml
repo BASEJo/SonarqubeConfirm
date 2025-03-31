@@ -15,9 +15,9 @@ jobs:
       sonar:
         image: sonarqube:latest
         options: >-
-          -p 9001:9001
+          -p 9002:9000
         ports:
-          - 9001:9001
+          - 9002:9000
 
     steps:
       - name: Checkout repository
@@ -25,10 +25,10 @@ jobs:
 
       - name: Run SonarQube analysis
         run: |
-          curl -u ${{ secrets.GITACTION_SONAR_TOKEN }}: -X POST "http://localhost:9001/api/projects/create?name=MyProject&project=MyProjectKey"
+          curl -u ${{ secrets.GITACTION_SONAR_TOKEN }}: -X POST "http://localhost:9002/api/projects/create?name=MyProject&project=MyProjectKey"
           
           sonar-scanner \
             -Dsonar.projectKey=MyProjectKey \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://localhost:9001 \
+            -Dsonar.host.url=http://localhost:9002 \
             -Dsonar.login=${{ secrets.GITACTION_SONAR_TOKEN }}
