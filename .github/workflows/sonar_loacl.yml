@@ -36,6 +36,7 @@ jobs:
           -Dsonar.projectName="My Project" \
           -Dsonar.projectVersion=1.0 \
           -Dsonar.sources=src \
+          -Dsonar.host.url=http://localhost
           -Dsonar.login="" \
           -Dsonar.token="" \
           -Dsonar.report.export.path=target/sonar-report.json
