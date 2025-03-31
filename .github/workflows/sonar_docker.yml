@@ -29,11 +29,19 @@ jobs:
       - name: List running Docker containers
         run: docker ps
 
-      # 等待 SonarQube 启动并可用
+      # 等待 SonarQube 启动并可用（增加重试机制）
       - name: Wait for SonarQube to be available
         run: |
           echo "Waiting for SonarQube to be available..."
-          curl --silent --show-error --max-time 60 http://localhost:9003/api/system/health || exit 1
+          for i in {1..10}; do
+            curl --silent --show-error --max-time 60 http://localhost:9003/api/system/health && echo "SonarQube is available!" && break
+            echo "Attempt $i failed, retrying in 10 seconds..."
+            sleep 10
+          done
+          if [ $? -ne 0 ]; then
+            echo "SonarQube did not start in time"
+            exit 1
+          fi
 
       # 触发 SonarQube 项目创建
       - name: Trigger SonarQube project creation
