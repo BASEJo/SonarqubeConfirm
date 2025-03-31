@@ -36,11 +36,11 @@ jobs:
           -Dsonar.projectName="My Project" \
           -Dsonar.projectVersion=1.0 \
           -Dsonar.sources=src \
-          -Dsonar.host.url=file:///dev/null \
           -Dsonar.login="" \
           -Dsonar.token="" \
-          -Dsonar.report.export.path=target/sonar-report.json
-          -Dsonar.skip=true
+          -Dsonar.report.export.path=target/sonar-report.json \
+          -Dsonar.skip=true \
+          -Dsonar.analysis.mode=preview
 
     - name: Display SonarQube Report
       run: |
