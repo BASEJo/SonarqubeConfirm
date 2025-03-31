@@ -11,6 +11,8 @@ public class Main {
     public void doSomething(File file, Lock lock) {
         file.delete();  // Noncompliant
         // ...
-        // lock.tryLock(); // Noncompliant
+        lock.tryLock(); // Noncompliant
+
+        // System.out.println("Hello world!");
     }
 }

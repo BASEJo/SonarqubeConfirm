@@ -1,0 +1,47 @@
+name: SonarQube Scan (Local)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonar-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'corretto'
+        java-version: '21'
+        cache: maven
+
+    - name: Install SonarScanner
+      run: |
+        curl -sSLo sonarscanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889.zip
+        unzip sonarscanner.zip
+        sudo mv sonar-scanner-7.1.0.4889 /opt/sonar-scanner
+        sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+
+    - name: Run SonarScanner
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=my_project_key \
+          -Dsonar.projectName="My Project" \
+          -Dsonar.projectVersion=1.0 \
+          -Dsonar.sources=src \
+          -Dsonar.login="" \
+          -Dsonar.token="" \
+          -Dsonar.report.export.path=target/sonar-report.json \
+          -Dsonar.skip=true \
+          -Dsonar.analysis.mode=preview
+
+    - name: Display SonarQube Report
+      run: |
+        cat target/sonar-report.json
