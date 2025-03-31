@@ -31,4 +31,4 @@ jobs:
             -Dsonar.sources=src \
             -Dsonar.language=java \
             -Dsonar.analysis.mode=preview \
-            -Dsonar.host.url=http://localhost
+            -Dsonar.host.url=http://localhost:9999
