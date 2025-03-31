@@ -29,4 +29,5 @@ jobs:
           mvn org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar \
             -Dsonar.projectKey=test_project \
             -Dsonar.sources=src \
-            -Dsonar.language=java
+            -Dsonar.language=java \
+            -Dsonar.analysis.mode=preview
