@@ -23,7 +23,7 @@ jobs:
 
       - name: Download SonarScanner CLI from GitHub Releases
         run: |
-          wget -O sonar-scanner-cli.zip https://github.com/SonarSource/sonar-scanner-cli/releases/latest/download/sonar-scanner-cli.zip
+          wget -O sonar-scanner-cli.zip https://github.com/SonarSource/sonar-scanner-cli/archive/refs/tags/7.1.0.4889.zip
           unzip sonar-scanner-cli.zip
 
       - name: Run SonarQube Scanner (No Server)
