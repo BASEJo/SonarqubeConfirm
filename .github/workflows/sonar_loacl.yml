@@ -30,4 +30,5 @@ jobs:
             -Dsonar.projectKey=test_project \
             -Dsonar.sources=src \
             -Dsonar.language=java \
-            -Dsonar.analysis.mode=preview
+            -Dsonar.analysis.mode=preview \
+            -Dsonar.host.url=http://localhost
