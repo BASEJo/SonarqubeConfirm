@@ -34,7 +34,4 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.DOCKER_SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.DOCKER_SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=DockerSonarqubeConfirm \
-          -Dsonar.projectName='DockerSonarqubeConfirm' \
-          -Dsonar.qualitygate.wait=true \
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DockerSonarqubeConfirm -Dsonar.projectName='DockerSonarqubeConfirm' -Dsonar.qualitygate.wait=true
