@@ -10,10 +10,6 @@ jobs:
   sonarqube:
     runs-on: ubuntu-latest
     steps:
-      - name: Test connection to SonarQube server
-        run: |
-          curl -v https://4acd-126-167-123-135.ngrok-free.app
-
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
@@ -38,4 +34,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.DOCKER_SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.DOCKER_SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DockerSonarqubeConfirm -Dsonar.projectName='DockerSonarqubeConfirm'
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=DockerSonarqubeConfirm \
+          -Dsonar.projectName='DockerSonarqubeConfirm' \
+          -Dsonar.qualitygate.wait=true \
